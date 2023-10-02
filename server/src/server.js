@@ -5,13 +5,15 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const app = express();
 
+require('dotenv').config();
+
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: true }));
+app.use(session({ secret: process.env.SECRET_SESSION_KEY, resave: true, saveUninitialized: true }));
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/testdb', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
