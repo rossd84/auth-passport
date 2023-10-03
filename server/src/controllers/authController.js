@@ -3,6 +3,7 @@ const passport = require('passport');
 const User = require('../models/User');
 
 exports.register = async (req, res) => {
+  console.log('register hit')
   try {
     const { username, password } = req.body;
 

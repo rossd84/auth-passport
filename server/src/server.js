@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('./config/passport');
 const routes = require('./routes');
+const cors = require('cors')
 
 const app = express();
 
@@ -15,6 +16,12 @@ app.use(bodyParser.json());
 app.use(session({ secret: process.env.SECRET_SESSION_KEY, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
+// app.use(cors({
+//   origin: "http://127.0.0.1:5173/",
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true,
+// }));
 
 // Routes
 app.use(routes)
